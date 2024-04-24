@@ -1,0 +1,6 @@
+res://default_env.tres
+res://levels/csg_test.tscn
+res://scenes/Box.tscn
+res://scenes/Level.tscn
+res://src/player/player.tscn
+res://src/player/Player.gd

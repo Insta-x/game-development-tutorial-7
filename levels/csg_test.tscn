@@ -1,0 +1,198 @@
+[gd_scene load_steps=24 format=3 uid="uid://b5fcwja00s2ht"]
+
+[ext_resource type="Texture2D" uid="uid://c0hl3ynupisgt" path="res://assets/hdris/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="1_lco6g"]
+[ext_resource type="PackedScene" uid="uid://0i5qcjdr3i8o" path="res://src/player/player.tscn" id="1_txctd"]
+[ext_resource type="Texture2D" uid="uid://c056cy1n7gmmw" path="res://assets/textures/grids/Dark/texture_07.png" id="3_jyuxx"]
+[ext_resource type="Texture2D" uid="uid://cucgybt6ybemg" path="res://assets/textures/grids/Orange/texture_01.png" id="4_yw3ow"]
+[ext_resource type="Texture2D" uid="uid://dko2pc0uq6pwf" path="res://assets/textures/grids/Green/texture_01.png" id="5_tqvp3"]
+[ext_resource type="Texture2D" uid="uid://xkyv5e0kiw4m" path="res://assets/Keanu.png" id="6_fu682"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sfosp"]
+panorama = ExtResource("1_lco6g")
+
+[sub_resource type="Sky" id="Sky_ljt2s"]
+sky_material = SubResource("PanoramaSkyMaterial_sfosp")
+
+[sub_resource type="Environment" id="Environment_2dgej"]
+background_mode = 2
+sky = SubResource("Sky_ljt2s")
+ambient_light_sky_contribution = 0.8
+tonemap_mode = 2
+tonemap_exposure = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icfsc"]
+albedo_texture = ExtResource("3_jyuxx")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_oa6il"]
+material = SubResource("StandardMaterial3D_icfsc")
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5m7dp"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tc57"]
+albedo_texture = ExtResource("4_yw3ow")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_81d38"]
+material = SubResource("StandardMaterial3D_5tc57")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f1lnb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_orj4p"]
+albedo_texture = ExtResource("5_tqvp3")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_vkv1t"]
+material = SubResource("StandardMaterial3D_orj4p")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ru6gw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xvud1"]
+size = Vector3(10, 10, 4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yy2u2"]
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12mdu"]
+albedo_texture = ExtResource("6_fu682")
+
+[sub_resource type="LabelSettings" id="LabelSettings_u465l"]
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3jema"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="CSGTest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2dgej")
+
+[node name="Player" parent="." instance=ExtResource("1_txctd")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+metadata/item_root = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_oa6il")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_5m7dp")
+
+[node name="Box" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -4.90549)
+metadata/item_root = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
+mesh = SubResource("BoxMesh_81d38")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
+shape = SubResource("BoxShape3D_f1lnb")
+
+[node name="Cube" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.587641, 2.97109, -5.45548)
+metadata/item_root = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cube"]
+mesh = SubResource("BoxMesh_vkv1t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube"]
+shape = SubResource("BoxShape3D_ru6gw")
+
+[node name="FinishArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -20)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FinishArea"]
+shape = SubResource("BoxShape3D_xvud1")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="FinishArea"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_yy2u2")
+material = SubResource("StandardMaterial3D_12mdu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Instructions" type="VBoxContainer" parent="CanvasLayer/GUI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -339.0
+offset_top = -170.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GUI/Instructions"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Instructions/VBoxContainer"]
+layout_mode = 2
+text = "CONTROL"
+label_settings = SubResource("LabelSettings_u465l")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/GUI/Instructions/VBoxContainer"]
+layout_mode = 2
+text = "Q - Uncapture Mouse"
+label_settings = SubResource("LabelSettings_3jema")
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="CanvasLayer/GUI/Instructions/VBoxContainer"]
+layout_mode = 2
+text = "LMB - Take a Photo"
+label_settings = SubResource("LabelSettings_3jema")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/GUI/Instructions/VBoxContainer"]
+layout_mode = 2
+text = "RMB - Apply the Photo"
+label_settings = SubResource("LabelSettings_3jema")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/GUI/Instructions"]
+layout_mode = 2
+text = "Reach Keanu to Win!"
+label_settings = SubResource("LabelSettings_u465l")
+horizontal_alignment = 1
+
+[node name="WinScreen" type="CenterContainer" parent="CanvasLayer/GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/GUI/WinScreen"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][font_size=50][rainbow freq=0.5 sat=0.7 val=0.8]YOU WIN....
+AND YOU'RE BREATHTAKING![/rainbow][/font_size][/center]"
+fit_content = true
+autowrap_mode = 0
+
+[connection signal="body_entered" from="FinishArea" to="CanvasLayer/GUI/WinScreen" method="show" unbinds=1]

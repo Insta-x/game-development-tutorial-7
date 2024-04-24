@@ -1,0 +1,239 @@
+[gd_scene load_steps=15 format=3 uid="uid://0i5qcjdr3i8o"]
+
+[ext_resource type="Script" path="res://src/player/Player.gd" id="1_vulk6"]
+[ext_resource type="Texture2D" uid="uid://b4uahe1m8opna" path="res://assets/images/black-border.png" id="2_5bbwp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_snoro"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rhm8q"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_q77d2"]
+_surfaces = [{
+"aabb": AABB(-50, -50, -100, 100, 100, 100),
+"format": 34896613377,
+"index_count": 18,
+"index_data": PackedByteArray(0, 0, 3, 0, 2, 0, 0, 0, 1, 0, 3, 0, 1, 0, 4, 0, 3, 0, 2, 0, 4, 0, 0, 0, 3, 0, 4, 0, 2, 0, 0, 0, 4, 0, 1, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 127, 255, 127, 255, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vtfwt"]
+resource_name = "IntersectMesh_Plane"
+_surfaces = [{
+"aabb": AABB(-50, -50, -100, 100, 100, 100),
+"attribute_data": PackedByteArray(0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 127, 255, 127, 255, 127, 255, 127, 255, 127, 255, 127, 255, 127, 255, 127),
+"format": 34896613399,
+"index_count": 18,
+"index_data": PackedByteArray(2, 0, 9, 0, 7, 0, 2, 0, 4, 0, 9, 0, 5, 0, 15, 0, 11, 0, 6, 0, 12, 0, 0, 0, 10, 0, 14, 0, 8, 0, 1, 0, 13, 0, 3, 0),
+"material": SubResource("StandardMaterial3D_rhm8q"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 27, 173, 0, 0, 0, 0, 0, 0, 27, 173, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 27, 173, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 27, 173, 0, 0, 255, 255, 0, 0, 27, 173, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 27, 173, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 27, 173, 255, 255, 255, 255, 0, 0, 27, 173, 255, 127, 255, 127, 255, 255, 27, 173, 255, 127, 255, 127, 255, 255, 27, 173, 255, 127, 255, 127, 255, 255, 27, 173, 255, 127, 255, 127, 255, 255, 27, 173, 255, 127, 255, 255, 0, 0, 255, 127, 255, 255, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 255, 127, 0, 0, 255, 127, 255, 255, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 127, 0, 0, 255, 127, 255, 255, 0, 0, 255, 127, 255, 255, 255, 127, 255, 127, 0, 0)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_q77d2")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a54eb"]
+viewport_path = NodePath("Head/Camera3D/PhotoSubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7kft"]
+resource_local_to_scene = true
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+albedo_texture = SubResource("ViewportTexture_a54eb")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ybkkd"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_j7kft")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_iuplf"]
+points = PackedVector3Array(0, 0, 0, -50, 50, 100, 50, 50, 100, 50, -50, 100, -50, -50, 100)
+
+[sub_resource type="Animation" id="Animation_5p0ls"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Photo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.176509, -0.075002, -0.195128)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Photo:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.309, -0.261799, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jgaih"]
+resource_name = "apply_photo"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Photo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.176509, -0.075002, -0.195128), Vector3(0, 0, -0.1), Vector3(0, 0, -0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Photo:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.309, -0.261799, 0), Vector3(1.5708, 0, 0), Vector3(1.5708, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cjlag"]
+resource_name = "capture_photo"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Photo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.1), Vector3(0, 0, -0.1), Vector3(0.176509, -0.075002, -0.195128)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Photo:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0), Vector3(1.5708, 0, 0), Vector3(1.309, -0.261799, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hvwv1"]
+_data = {
+"RESET": SubResource("Animation_5p0ls"),
+"apply_photo": SubResource("Animation_jgaih"),
+"capture_photo": SubResource("Animation_cjlag")
+}
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_vulk6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_snoro")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head"]
+remote_path = NodePath("../Camera3D/PhotoSubViewport/PhotoCamera")
+update_scale = false
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Head"]
+visible = false
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Head/CSGCombiner3D"]
+
+[node name="CSGIntersector" type="CSGMesh3D" parent="Head/CSGCombiner3D"]
+operation = 2
+mesh = SubResource("ArrayMesh_vtfwt")
+
+[node name="Photo" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(0.965926, -0.25, -0.0669864, 0, 0.258816, -0.965927, 0.258819, 0.933014, 0.249997, 0.176509, -0.075002, -0.195128)
+visible = false
+layers = 2
+mesh = SubResource("PlaneMesh_ybkkd")
+
+[node name="ObjectDetector" type="Area3D" parent="Head"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/ObjectDetector"]
+shape = SubResource("ConvexPolygonShape3D_iuplf")
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+current = true
+
+[node name="PhotoSubViewport" type="SubViewport" parent="Head/Camera3D"]
+render_target_update_mode = 0
+
+[node name="PhotoCamera" type="Camera3D" parent="Head/Camera3D/PhotoSubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+keep_aspect = 0
+cull_mask = 2147483645
+current = true
+fov = 53.1
+
+[node name="ObjectsHolder" type="Node3D" parent="Head"]
+process_mode = 4
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hvwv1")
+}
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="SubViewportContainer/SubViewport"]
+modulate = Color(1, 1, 1, 0.25)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5bbwp")
+draw_center = false
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4

@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://of0ll3ebk36d"]
+
+[ext_resource type="PackedScene" uid="uid://gnljmq6i8rmo" path="res://assets/models/Playspace.blend" id="1_orcd5"]
+[ext_resource type="Texture2D" uid="uid://c0hl3ynupisgt" path="res://assets/hdris/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="2_tpc0p"]
+[ext_resource type="PackedScene" uid="uid://0i5qcjdr3i8o" path="res://src/player/player.tscn" id="3_pqiwy"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sfosp"]
+panorama = ExtResource("2_tpc0p")
+
+[sub_resource type="Sky" id="Sky_18hdd"]
+sky_material = SubResource("PanoramaSkyMaterial_sfosp")
+
+[sub_resource type="Environment" id="Environment_yi8ig"]
+background_mode = 2
+sky = SubResource("Sky_18hdd")
+ambient_light_sky_contribution = 0.8
+tonemap_mode = 2
+tonemap_exposure = 0.6
+
+[node name="GameWorld" type="Node3D"]
+
+[node name="Env" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Env"]
+environment = SubResource("Environment_yi8ig")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Env"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("3_pqiwy")]
+
+[node name="Playspace" parent="." instance=ExtResource("1_orcd5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26, 0)

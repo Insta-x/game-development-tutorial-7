@@ -1,0 +1,9 @@
+RichTextLabel
+Label
+CenterContainer
+VBoxContainer
+Control
+CanvasLayer
+CSGMesh3D
+CollisionShape3D
+Area3D
